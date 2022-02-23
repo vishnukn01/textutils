@@ -1,8 +1,11 @@
 import React from "react";
-import PropTypes from 'prop-types'
-export default function Navbar (props) {
+import PropTypes from "prop-types";
+
+export default function Navbar(props) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
+    >
       <a className="navbar-brand" href="/">
         {props.title}
       </a>
@@ -31,7 +34,7 @@ export default function Navbar (props) {
             </a>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
+        {/* <form className="form-inline my-2 my-lg-0">
           <input
             className="form-control mr-sm-2"
             type="search"
@@ -44,17 +47,28 @@ export default function Navbar (props) {
           >
             Search
           </button>
-        </form>
+        </form> */}
+        <div className={`custom-control custom-switch text-${props.mode === 'light' ? 'dark':'light'}`}>
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="customSwitch1"
+            onClick={props.toggleMode}
+          />
+          <label className="custom-control-label" htmlFor="customSwitch1">
+            Toggle Dark Mode
+          </label>
+        </div>
       </div>
     </nav>
   );
 }
 
 Navbar.propTypes = {
-    title:PropTypes.string.isRequired,
-    about: PropTypes.string.isRequired
-}
+  title: PropTypes.string.isRequired,
+  about: PropTypes.string.isRequired,
+};
 
 Navbar.defaultProps = {
-    about: "About text here"
-}
+  about: "About text here",
+};
